@@ -1,0 +1,4 @@
+# Those files or folders ignored by git
+
+placementManagementEnv/
+db.sqlite3
