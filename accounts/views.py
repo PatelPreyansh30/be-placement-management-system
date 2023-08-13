@@ -1,7 +1,13 @@
-from rest_framework import generics, viewsets
+from rest_framework.generics import CreateAPIView
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import StudentModel
-from .serializer import StudentSerializer
+from .serializer import StudentSerializer, CustomTokenObtainPairSerializer
 
-class StudentRegistrationView(generics.CreateAPIView):
+
+class StudentRegistrationView(CreateAPIView):
     queryset = StudentModel.objects.all()
     serializer_class = StudentSerializer
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

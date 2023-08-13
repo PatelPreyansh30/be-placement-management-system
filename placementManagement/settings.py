@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
+    'rest_framework_simplejwt',
     'accounts',
     'students',
 ]
@@ -84,8 +86,8 @@ DATABASES = {
         'NAME': 'placement-management-database',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST':'localhost',
-        'PORT':'3307',
+        'HOST': 'localhost',
+        'PORT': '3307',
     }
 }
 
@@ -130,6 +132,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    'TOKEN_RESPONSE_SERIALIZER': 'accounts.serializer.CustomTokenObtainPairSerializer',
+}
 
 INTERNAL_IPS = [
     "127.0.0.1",
