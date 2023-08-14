@@ -4,13 +4,6 @@ from django.contrib.auth.models import AbstractBaseUser
 from .manager import CustomUserManager
 
 
-# class StudentModel(AbstractBaseUser):
-#     whatsappMobile = models.CharField(max_length=150)
-#     alternateMobile = models.CharField(max_length=150)
-#     address = models.TextField()
-#     city = models.CharField(max_length=150)
-
-
 class CustomUserModel(AbstractBaseUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           auto_created=True, editable=False)
