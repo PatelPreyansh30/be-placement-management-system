@@ -1,20 +1,19 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import StudentModel
+from .models import CustomUserModel
 
 
-class StudentSerializer(serializers.ModelSerializer):
+class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StudentModel
-        fields = ("id", "firstName", "lastName", "mobile", "whatsappMobile",
-                  "alternateMobile", "email", "address", "city", "isVerified", "isBlocked",)
+        model = CustomUserModel
+        fields = '__all__'
 
     def create(self, validate_data):
         try:
             password = validate_data.pop('password')
-            student = StudentModel.objects.create_user(
+            user = CustomUserModel.objects.create_user(
                 email=validate_data.pop('email'), password=password, **validate_data)
-            return student
+            return user
         except:
             raise serializers.ValidationError(
                 {'password': ['This field may not be blank.']})
@@ -23,6 +22,6 @@ class StudentSerializer(serializers.ModelSerializer):
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        student = self.user
-        data['user'] = StudentSerializer(student).data
+        custom_user = self.user
+        data['user'] = CustomUserSerializer(custom_user).data
         return data
