@@ -25,3 +25,22 @@ class StudentModel(AbstractBaseUser):
     objects = StudentManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+
+class FacultyModel(AbstractBaseUser):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          auto_created=True, editable=False)
+    username = None
+    firstName = models.CharField(max_length=150)
+    lastName = models.CharField(max_length=150)
+    mobile = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(max_length=150, unique=True)
+    password = models.CharField(max_length=150)
+    isFaculty = models.BooleanField(default=True)
+    isAdmin = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    objects = StudentManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
