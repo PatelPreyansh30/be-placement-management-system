@@ -10,10 +10,14 @@ class StudentSerializer(serializers.ModelSerializer):
                   "alternateMobile", "email", "address", "city", "isVerified", "isBlocked",)
 
     def create(self, validate_data):
-        password = validate_data.pop('password')
-        student = StudentModel.objects.create_user(
-            email=validate_data.pop('email'), password=password, **validate_data)
-        return student
+        try:
+            password = validate_data.pop('password')
+            student = StudentModel.objects.create_user(
+                email=validate_data.pop('email'), password=password, **validate_data)
+            return student
+        except:
+            raise serializers.ValidationError(
+                {'password': ['This field may not be blank.']})
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
