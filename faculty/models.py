@@ -10,7 +10,7 @@ class FacultyPersonalModel(models.Model):
                           auto_created=True, editable=False)
     facultyId = models.OneToOneField(UserModel, on_delete=models.CASCADE)
     address = models.TextField()
-    profilePic = models.FileField(upload_to="faculty_profile_pic/")
+    profilePic = models.ImageField(upload_to="faculty_profile_pic/")
     alternateMobile = models.CharField(max_length=150)
     alternateEmail = models.EmailField(max_length=150, unique=True)
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)

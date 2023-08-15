@@ -18,7 +18,7 @@ class StudentPersonalDetailModel(models.Model):
     whatsappMobile = models.CharField(max_length=150)
     alternateMobile = models.CharField(max_length=150)
     address = models.TextField()
-    profilePic = models.FileField(upload_to="student_profile_pic/")
+    profilePic = models.ImageField(upload_to="student_profile_pic/")
     resume = models.FileField(upload_to="student_resumes/")
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
