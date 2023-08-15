@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import StudentPersonalDetailModel, StudentCollegeDetailModel
+from .models import StudentPersonalDetailModel, StudentCollegeDetailModel, StudentSchoolDetailModel
 
 
 class StudentPersonalDetailSerializer(ModelSerializer):
@@ -23,4 +23,10 @@ class StudentPersonalDetailSerializer(ModelSerializer):
 class StudentCollegeDetailSerializer(ModelSerializer):
     class Meta:
         model = StudentCollegeDetailModel
+        fields = '__all__'
+
+
+class StudentSchoolDetailSerializer(ModelSerializer):
+    class Meta:
+        model = StudentSchoolDetailModel
         fields = '__all__'
