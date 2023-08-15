@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import StudentPersonalDetailModel
+from .models import StudentPersonalDetailModel, StudentCollegeDetailModel
 
 
 class StudentPersonalDetailSerializer(ModelSerializer):
@@ -18,3 +18,9 @@ class StudentPersonalDetailSerializer(ModelSerializer):
             instance.profilePic = new_profile_pic
         instance.save()
         return instance
+
+
+class StudentCollegeDetailSerializer(ModelSerializer):
+    class Meta:
+        model = StudentCollegeDetailModel
+        fields = '__all__'
