@@ -22,4 +22,16 @@ class CompanyDetailView(ReadOnlyModelViewSet):
     def get_queryset(self):
         return CompanyModel.objects.prefetch_related('company_document').all()
 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+
+
+class ClosedCompanyView(ReadOnlyModelViewSet):
+    queryset = CompanyModel.objects.filter(isClosed=True).all()
+    serializer_class = CompanySerializer
+    # permission_classes = [IsAuthenticated]
+
+
+class OpenCompanyView(ReadOnlyModelViewSet):
+    queryset = CompanyModel.objects.filter(isClosed=False).all()
+    serializer_class = CompanySerializer
+    # permission_classes = [IsAuthenticated]
