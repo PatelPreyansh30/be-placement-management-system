@@ -15,3 +15,10 @@ class FacultyPersonalModel(models.Model):
     alternateEmail = models.EmailField(max_length=150, unique=True)
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.id
+    
+    def delete(self, *args, **kwargs):
+        self.profilePic.delete()
+        super().delete(*args, **kwargs)

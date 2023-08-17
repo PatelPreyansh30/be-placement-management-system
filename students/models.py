@@ -23,6 +23,14 @@ class StudentPersonalDetailModel(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+    def __str__(self):
+        return self.id
+    
+    def delete(self, *args, **kwargs):
+        self.profilePic.delete()
+        self.resume.delete()
+        super().delete(*args, **kwargs)
+
 
 class StudentSchoolDetailModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,

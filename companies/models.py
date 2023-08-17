@@ -23,3 +23,10 @@ class CompanyDocumentsModel(models.Model):
     document = models.FileField(upload_to='company_documents/')
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.id
+
+    def delete(self, *args, **kwargs):
+        self.document.delete()
+        super().delete(*args, **kwargs)
