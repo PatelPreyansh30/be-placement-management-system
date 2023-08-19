@@ -19,16 +19,21 @@ class StudentPersonalDetailModel(models.Model):
     alternateMobile = models.CharField(max_length=150)
     address = models.TextField()
     profilePic = models.ImageField(upload_to="student_profile_pic/")
-    resume = models.FileField(upload_to="student_resumes/")
+    resume = models.FileField(upload_to="student_resume/")
+    placementGuidelineForm = models.FileField(
+        upload_to="student_placement_guidelines_form/")
+    isVerified = models.BooleanField(default=False)
+    isBlocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return self.id
-    
+
     def delete(self, *args, **kwargs):
         self.profilePic.delete()
         self.resume.delete()
+        self.placementGuidelineForm.delete()
         super().delete(*args, **kwargs)
 
 

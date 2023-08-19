@@ -13,10 +13,8 @@ class CustomUserModel(AbstractBaseUser):
     email = models.EmailField(max_length=150, unique=True)
     password = models.CharField(max_length=150)
     isStudent = models.BooleanField(default=False)
-    isFaculty = models.BooleanField(default=False)
+    isStaff = models.BooleanField(default=False)
     isAdmin = models.BooleanField(default=False)
-    isVerified = models.BooleanField(default=False)
-    isBlocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
     username = None
