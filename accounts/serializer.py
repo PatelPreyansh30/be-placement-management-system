@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from .models import CustomUserModel
 
@@ -7,6 +8,46 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUserModel
         fields = '__all__'
+        extra_kwargs = {
+            'firstName': {
+                'error_messages': {
+                    'blank': "First name is required",
+                }
+            },
+            'lastName': {
+                'error_messages': {
+                    'blank': "Last name is required",
+                }
+            },
+            'mobile': {
+                'error_messages': {
+                    'blank': "Mobile is required",
+                },
+                'validators': [
+                    UniqueValidator(
+                        queryset=CustomUserModel.objects.all(),
+                        message="Mobile number already exists"
+                    )
+                ]
+            },
+            'email': {
+                'error_messages': {
+                    'blank': "Email is required",
+                    'invalid': "Enter valid email address",
+                },
+                'validators': [
+                    UniqueValidator(
+                        queryset=CustomUserModel.objects.all(),
+                        message="Email already exists"
+                    )
+                ]
+            },
+            'password': {
+                'error_messages': {
+                    'blank': "Password is required",
+                }
+            },
+        }
 
     def create(self, validate_data):
         try:
@@ -35,6 +76,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class CustomTokenRefreshSerializer(TokenRefreshSerializer):
+    refresh = serializers.CharField(
+        error_messages={'blank': "Refresh token is required"})
+
     def validate(self, attrs):
         refresh = self.token_class(attrs['refresh'])
         access_token = refresh.access_token
