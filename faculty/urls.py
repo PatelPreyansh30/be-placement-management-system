@@ -1,9 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import FacultyPersonalView
+from . import views
 
 router = DefaultRouter()
-router.register('personal', FacultyPersonalView)
+router.register('personal', views.FacultyPersonalView)
+router.register('dashboard-profile',
+                views.FacultyDashboardView, basename='dashboard-profile')
 
 urlpatterns = [
 ] + router.urls

@@ -8,7 +8,7 @@ UserModel = get_user_model()
 class FacultyPersonalModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           auto_created=True, editable=False)
-    facultyId = models.OneToOneField(UserModel, on_delete=models.CASCADE)
+    facultyId = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name="facultyDetail")
     address = models.TextField()
     profilePic = models.ImageField(upload_to="faculty_profile_pic/")
     alternateMobile = models.CharField(max_length=150)
