@@ -1,10 +1,13 @@
 from rest_framework.serializers import ModelSerializer
-from .models import StudentPersonalDetailModel, StudentCollegeDetailModel, StudentSchoolDetailModel
+from django.contrib.auth import get_user_model
+from . import models
+
+User = get_user_model()
 
 
 class StudentPersonalDetailSerializer(ModelSerializer):
     class Meta:
-        model = StudentPersonalDetailModel
+        model = models.StudentPersonalDetailModel
         fields = '__all__'
 
     def update(self, instance, validated_data):
@@ -26,11 +29,34 @@ class StudentPersonalDetailSerializer(ModelSerializer):
 
 class StudentCollegeDetailSerializer(ModelSerializer):
     class Meta:
-        model = StudentCollegeDetailModel
+        model = models.StudentCollegeDetailModel
         fields = '__all__'
 
 
 class StudentSchoolDetailSerializer(ModelSerializer):
     class Meta:
-        model = StudentSchoolDetailModel
+        model = models.StudentSchoolDetailModel
         fields = '__all__'
+
+
+class StudentDetailedSerializer(ModelSerializer):
+    college_detail = StudentCollegeDetailSerializer(read_only=True)
+    school_detail = StudentSchoolDetailSerializer(read_only=True)
+
+    class Meta:
+        model = models.StudentPersonalDetailModel
+        fields = '__all__'
+
+
+class StudentProfilPicForDashboardSerializer(ModelSerializer):
+    class Meta:
+        model = models.StudentPersonalDetailModel
+        fields = ['profilePic']
+
+
+class StudentForDashboardSerializer(ModelSerializer):
+    accountDetail = StudentProfilPicForDashboardSerializer(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'firstName', 'lastName', 'accountDetail']
