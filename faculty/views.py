@@ -1,18 +1,18 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, mixins
 from django.contrib.auth import get_user_model
 from . import models, serializer
 
 User = get_user_model()
 
 
-class FacultyPersonalView(viewsets.ModelViewSet):
-    queryset = models.FacultyPersonalModel.objects.all()
-    serializer_class = serializer.FacultyPersonalSerializer
+class FacultyView(mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
+    queryset = models.FacultyModel.objects.all()
+    serializer_class = serializer.FacultySerializer
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class FacultyDashboardView(viewsets.ReadOnlyModelViewSet):
-    serializer_class = serializer.FacultyDashboardSerializer
+class FacultyDetailedView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    serializer_class = serializer.FacultyDetailedSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):

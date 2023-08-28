@@ -5,9 +5,9 @@ from . import models
 User = get_user_model()
 
 
-class FacultyPersonalSerializer(ModelSerializer):
+class FacultySerializer(ModelSerializer):
     class Meta:
-        model = models.FacultyPersonalModel
+        model = models.FacultyModel
         fields = '__all__'
 
     def update(self, instance, validated_data):
@@ -21,15 +21,10 @@ class FacultyPersonalSerializer(ModelSerializer):
         return instance
 
 
-class FacultyProfilePicForDashboardSerializer(ModelSerializer):
-    class Meta:
-        model = models.FacultyPersonalModel
-        fields = ['profilePic']
-
-
-class FacultyDashboardSerializer(ModelSerializer):
-    facultyDetail = FacultyProfilePicForDashboardSerializer(read_only=True)
+class FacultyDetailedSerializer(ModelSerializer):
+    facultyDetail = FacultySerializer(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'firstName', 'lastName', 'facultyDetail']
+        fields = ['id', 'firstName', 'lastName', 'facultyDetail',
+                  'mobile', 'email', 'isStudent', 'isStaff']
