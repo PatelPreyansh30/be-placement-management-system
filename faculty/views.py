@@ -16,4 +16,4 @@ class FacultyDashboardView(viewsets.ReadOnlyModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return User.objects.filter(isStaff=True).prefetch_related('accountDetail').all()
+        return User.objects.filter(isStaff=True).prefetch_related('facultyDetail').all()

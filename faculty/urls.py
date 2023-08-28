@@ -5,7 +5,7 @@ from . import views
 router = DefaultRouter()
 router.register('personal', views.FacultyPersonalView)
 router.register('dashboard-profile',
-                views.FacultyDashboardView, basename='dashboard-profile')
+                views.FacultyDashboardView, basename='faculty-dashboard-profile')
 
 urlpatterns = [
 ] + router.urls

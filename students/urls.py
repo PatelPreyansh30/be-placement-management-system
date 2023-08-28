@@ -6,9 +6,9 @@ router = DefaultRouter()
 router.register('personal', views.StudentPersonalDetailView)
 router.register('college', views.StudentCollegeDetailView)
 router.register('school', views.StudentSchoolDetailView)
-router.register('detail', views.StudentDetailedViewset, basename='detail')
+router.register('detail', views.StudentDetailedViewset, basename='student-detail')
 router.register('dashboard-profile',
-                views.StudentForDashboardView, basename='dashboard-profile')
+                views.StudentForDashboardView, basename='student-dashboard-profile')
 
 urlpatterns = [
 ] + router.urls

@@ -34,4 +34,4 @@ class StudentForDashboardView(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializer.StudentForDashboardSerializer
 
     def get_queryset(self):
-        return User.objects.filter(isStudent=True).prefetch_related("accountDetail").all()
+        return User.objects.filter(isStudent=True).prefetch_related("studentDetail").all()

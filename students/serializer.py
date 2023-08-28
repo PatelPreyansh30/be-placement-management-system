@@ -55,8 +55,8 @@ class StudentProfilPicForDashboardSerializer(ModelSerializer):
 
 
 class StudentForDashboardSerializer(ModelSerializer):
-    accountDetail = StudentProfilPicForDashboardSerializer(read_only=True)
+    studentDetail = StudentProfilPicForDashboardSerializer(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'firstName', 'lastName', 'accountDetail']
+        fields = ['id', 'firstName', 'lastName', 'studentDetail']
