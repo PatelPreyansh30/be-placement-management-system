@@ -5,9 +5,9 @@ from . import models
 User = get_user_model()
 
 
-class StudentPersonalDetailSerializer(ModelSerializer):
+class StudentSerializer(ModelSerializer):
     class Meta:
-        model = models.StudentPersonalDetailModel
+        model = models.StudentModel
         fields = '__all__'
 
     def update(self, instance, validated_data):
@@ -27,36 +27,10 @@ class StudentPersonalDetailSerializer(ModelSerializer):
         return instance
 
 
-class StudentCollegeDetailSerializer(ModelSerializer):
-    class Meta:
-        model = models.StudentCollegeDetailModel
-        fields = '__all__'
-
-
-class StudentSchoolDetailSerializer(ModelSerializer):
-    class Meta:
-        model = models.StudentSchoolDetailModel
-        fields = '__all__'
-
-
 class StudentDetailedSerializer(ModelSerializer):
-    college_detail = StudentCollegeDetailSerializer(read_only=True)
-    school_detail = StudentSchoolDetailSerializer(read_only=True)
-
-    class Meta:
-        model = models.StudentPersonalDetailModel
-        fields = '__all__'
-
-
-class StudentProfilPicForDashboardSerializer(ModelSerializer):
-    class Meta:
-        model = models.StudentPersonalDetailModel
-        fields = ['profilePic']
-
-
-class StudentForDashboardSerializer(ModelSerializer):
-    studentDetail = StudentProfilPicForDashboardSerializer(read_only=True)
+    studentDetail = StudentSerializer(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'firstName', 'lastName', 'studentDetail']
+        fields = ['id', 'firstName', 'lastName', 'studentDetail',
+                  'mobile', 'email', 'isStudent', 'isStaff']

@@ -1,37 +1,19 @@
-from rest_framework import mixins, viewsets, permissions
+from rest_framework import mixins, viewsets, permissions, response
 from django.contrib.auth import get_user_model
 from . import serializer, models
 
 User = get_user_model()
 
 
-class StudentPersonalDetailView(viewsets.ModelViewSet):
-    queryset = models.StudentPersonalDetailModel.objects.all()
-    serializer_class = serializer.StudentPersonalDetailSerializer
-    # permission_classes = [IsAuthenticated]
+class StudentView(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    queryset = models.StudentModel.objects.all()
+    serializer_class = serializer.StudentSerializer
+    # permission_classes = [permissions.IsAuthenticated]
 
 
-class StudentCollegeDetailView(viewsets.ModelViewSet):
-    queryset = models.StudentCollegeDetailModel.objects.all()
-    serializer_class = serializer.StudentCollegeDetailSerializer
-    # permission_classes = [IsAuthenticated]
-
-
-class StudentSchoolDetailView(viewsets.ModelViewSet):
-    queryset = models.StudentSchoolDetailModel.objects.all()
-    serializer_class = serializer.StudentSchoolDetailSerializer
-    # permission_classes = [IsAuthenticated]
-
-
-class StudentDetailedViewset(viewsets.ModelViewSet):
+class StudentDetailedView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = serializer.StudentDetailedSerializer
-
-    def get_queryset(self):
-        return models.StudentPersonalDetailModel.objects.select_related('studentId').prefetch_related('college_detail').prefetch_related('college_detail').all()
-
-
-class StudentForDashboardView(viewsets.ReadOnlyModelViewSet):
-    serializer_class = serializer.StudentForDashboardSerializer
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return User.objects.filter(isStudent=True).prefetch_related("studentDetail").all()
