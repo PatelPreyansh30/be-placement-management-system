@@ -13,6 +13,7 @@ class FacultyModel(models.Model):
     profilePic = models.ImageField(upload_to="faculty_profile_pic/")
     alternateMobile = models.CharField(max_length=150)
     alternateEmail = models.EmailField(max_length=150, unique=True)
+    isCompleted = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
 
