@@ -1,5 +1,6 @@
 from rest_framework.pagination import PageNumberPagination
 
+
 class CustomCompanyPagination(PageNumberPagination):
     default_page_size = 5
 
