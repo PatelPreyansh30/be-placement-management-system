@@ -1,6 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, viewsets, mixins, permissions
-from . import models, serializer, pagination
+from . import models, serializer
 
 
 class CompanyView(mixins.CreateModelMixin,
@@ -21,9 +21,7 @@ class CompanyDetailView(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializer.CompanyDetailSerializer
     filter_backends = [DjangoFilterBackend,
                        filters.OrderingFilter, filters.SearchFilter]
-    # filterset_fields = ['id']
     search_fields = ['name', 'location', 'website', 'description']
-    pagination_class = pagination.CustomCompanyPagination
     # permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):

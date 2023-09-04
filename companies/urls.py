@@ -3,10 +3,10 @@ from rest_framework.routers import DefaultRouter
 from .views import CompanyView, CompanyDetailView, CompanyDocumentView
 
 router = DefaultRouter()
-router.register('create', CompanyView, basename='company-post-put-delete')
-router.register('document', CompanyDocumentView,
-                basename='company-document-post-put-delete')
-router.register('details', CompanyDetailView, basename='company-get')
+router.register('create', CompanyView, basename='company-create')
+router.register('document/create', CompanyDocumentView,
+                basename='company-document-create')
+router.register('profile', CompanyDetailView, basename='company-profile')
 
 urlpatterns = [
 ] + router.urls

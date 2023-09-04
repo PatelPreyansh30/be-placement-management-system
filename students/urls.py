@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from . import views
 
 router = DefaultRouter()
-router.register('detail', views.StudentView, basename='student-detail')
+router.register('create', views.StudentCreateView, basename='student-create')
 router.register('profile', views.StudentDetailedView,
                 basename='student-profile')
 
