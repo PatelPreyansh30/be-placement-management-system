@@ -1,18 +1,22 @@
-from rest_framework.generics import CreateAPIView
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import viewsets, mixins, permissions
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .models import CustomUserModel
-from .serializer import UserSerializer, CustomTokenObtainPairSerializer, CustomTokenRefreshSerializer
+from . import serializer, models
 
 
-class CustomUserSignupView(ModelViewSet):
-    queryset = CustomUserModel.objects.all()
-    serializer_class = UserSerializer
+class CustomUserPostView(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = models.CustomUserModel.objects.all()
+    serializer_class = serializer.UserSerializer
+
+
+class CustomUserUpdateDeleteView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    queryset = models.CustomUserModel.objects.all()
+    serializer_class = serializer.UserSerializer
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
+    serializer_class = serializer.CustomTokenObtainPairSerializer
 
 
 class CustomTokenRefreshView(TokenRefreshView):
-    serializer_class = CustomTokenRefreshSerializer
+    serializer_class = serializer.CustomTokenRefreshSerializer
