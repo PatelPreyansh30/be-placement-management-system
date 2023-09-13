@@ -14,7 +14,7 @@ class PlacementApplicationModel(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           auto_created=True, editable=False)
-    studentId = models.OneToOneField(
+    studentId = models.ForeignKey(
         StudentModel, on_delete=models.CASCADE, related_name="appliedStudent")
     companyId = models.ForeignKey(
         CompanyModel, on_delete=models.CASCADE, related_name="appliedCompany")
@@ -23,3 +23,7 @@ class PlacementApplicationModel(models.Model):
     appliedAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     createdAt = models.DateTimeField(auto_now_add=True, auto_now=False)
     updatedAt = models.DateTimeField(auto_now_add=False, auto_now=True)
+    
+    def __str__(self):
+        return str(self.id)
+
