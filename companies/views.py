@@ -26,6 +26,6 @@ class CompanyDetailView(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         is_closed = self.request.query_params.get('isClosed')
-        if is_closed:
+        if is_closed and is_closed == "False":
             return models.CompanyModel.objects.prefetch_related('companyDocument').order_by("updatedAt").filter(isClosed=is_closed).all()
         return models.CompanyModel.objects.prefetch_related('companyDocument').order_by("updatedAt").all()
