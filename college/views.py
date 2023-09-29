@@ -5,7 +5,14 @@ from . import models, serializer
 
 
 class CollegeViewSet(viewsets.ModelViewSet):
-    queryset = models.CollegeModel.objects.all()
+    queryset = models.CollegeModel.objects.order_by('createdAt').all()
     serializer_class = serializer.CollegeSerializer
+    # permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None
+
+
+class BranchViewSet(viewsets.ModelViewSet):
+    queryset = models.BranchModel.objects.order_by('createdAt').all()
+    serializer_class = serializer.BranchSerializer
     # permission_classes = [permissions.IsAuthenticated]
     pagination_class = None

@@ -11,5 +11,5 @@ urlpatterns = [
     path('faculty/', include('faculty.urls')),
     path('company/', include('companies.urls')),
     path('placement/', include('placement.urls')),
-    path('college/', include('college.urls')),
+    path('university/', include('college.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
