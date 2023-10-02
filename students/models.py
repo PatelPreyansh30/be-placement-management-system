@@ -4,12 +4,6 @@ from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
 
-SCHOOL_MEDIUM = (
-    ('GUJ', 'Gujarati'),
-    ('ENG', 'English'),
-    ('HN', 'Hindi'),
-)
-
 
 class StudentModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
@@ -27,9 +21,9 @@ class StudentModel(models.Model):
         upload_to="student_placement_guidelines_form/")
 
     # Student school details
-    schoolMedium = models.CharField(max_length=50, choices=SCHOOL_MEDIUM)
+    schoolMedium = models.CharField(max_length=50)
     twelvePercent = models.DecimalField(
-        max_digits=4, decimal_places=2, null=True, blank=True)
+        max_digits=4, decimal_places=2)
     diplomaPercent = models.DecimalField(
         max_digits=4, decimal_places=2, null=True, blank=True)
     tenPercent = models.DecimalField(max_digits=4, decimal_places=2)

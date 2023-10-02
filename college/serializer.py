@@ -5,10 +5,10 @@ from . import models
 class CollegeSerializer(ModelSerializer):
     class Meta:
         model = models.CollegeModel
-        fields = ['id', 'label', 'value']
+        fields = ['id', 'name']
 
 
 class BranchSerializer(ModelSerializer):
     class Meta:
         model = models.BranchModel
-        fields = ['id', 'label', 'value']
+        fields = ['id', 'name']
