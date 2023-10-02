@@ -15,7 +15,7 @@ class StudentCreateView(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins
 class StudentDetailedView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = serializer.StudentDetailedSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['firstName', 'lastName', 'mobile', 'email']
+    search_fields = ['firstName', 'lastName', 'mobile', 'email', 'studentDetail__college', 'studentDetail__enrollmentNumber', 'studentDetail__branch']
     # permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
