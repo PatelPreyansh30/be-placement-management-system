@@ -162,9 +162,8 @@ INTERNAL_IPS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://placement-management-system-silk.vercel.app",
-    "https://placement-management-system-patelpreyansh30.vercel.app",
-    "https://placement-management-system-git-development-patelpreyansh30.vercel.app",
+    "https://student-placement-portal.vercel.app",
+    "https://admin-placement-portal.vercel.app",
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUserModel'
