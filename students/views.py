@@ -15,7 +15,8 @@ class StudentCreateView(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins
 class StudentDetailedView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = serializer.StudentDetailedSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['firstName', 'lastName', 'mobile', 'email', 'studentDetail__college', 'studentDetail__enrollmentNumber', 'studentDetail__branch']
+    search_fields = ['firstName', 'lastName', 'mobile', 'email', 'studentDetail__college',
+                     'studentDetail__enrollmentNumber', 'studentDetail__branch']
     # permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
@@ -24,7 +25,7 @@ class StudentDetailedView(mixins.ListModelMixin, mixins.RetrieveModelMixin, view
         is_blocked = self.request.query_params.get('isBlocked')
 
         if is_completed and is_completed == "True":
-            return User.objects.filter(isStudent=True).prefetch_related("studentDetail").filter(studentDetail__isCompleted=True).all()
+            return User.objects.filter(isStudent=True).prefetch_related("studentDetail").filter(studentDetail__isCompleted=True).filter(studentDetail__isVerified=False).all()
         if is_verified and is_verified == "True":
             return User.objects.filter(isStudent=True).prefetch_related("studentDetail").filter(studentDetail__isVerified=True).all()
         if is_blocked and is_blocked == "True":
